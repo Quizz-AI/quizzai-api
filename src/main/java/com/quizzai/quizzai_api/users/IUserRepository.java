@@ -11,10 +11,10 @@ import org.springframework.stereotype.Repository;
 public interface IUserRepository extends CrudRepository<UserEntity, Long> {
 
 
-    @Query("SELECT u FROM UserEntity u WHERE u.userId = :id" +
-            " OR u.name = :name" +
-            " OR u.email = :email" +
-            " OR u.country = :country")
+    @Query("SELECT u FROM UserEntity u WHERE (:id is NULL OR u.userId = :id)" +
+            " AND (:name IS NULL OR u.name = :name)" +
+            " AND (:email IS NULL OR u.email = :email)" +
+            " AND (:country IS NULL OR u.country = :country)")
     Page<UserEntity> findByFilter(@Param("id") Long id,
                                   @Param("name") String name,
                                   @Param("email") String email,
