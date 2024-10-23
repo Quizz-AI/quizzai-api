@@ -1,13 +1,11 @@
 package com.quizzai.quizzai_api.rooms;
 
-
 import com.quizzai.quizzai_api.quizes.QuizEntity;
 import com.quizzai.quizzai_api.users.UserEntity;
-
-import java.util.List;
-
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,20 +15,20 @@ import lombok.*;
 @Entity
 @Table(name = "rooms")
 public class RoomEntity {
-    
 
     @Id
     @SequenceGenerator(name = "roomIdSeq", sequenceName = "room_id_seq", allocationSize = 1)
     @GeneratedValue(generator = "roomIdSeq", strategy = GenerationType.SEQUENCE)
-    @Column(name = "roomId")
+    @Column(name = "roomId", nullable = false)
     private Long roomId;
 
     @NonNull
     @Column(name = "joinCode")
     private String joinCode;
 
+    // Cada sala tem um dono
     @ManyToOne
-    @JoinColumn(name = "owner_id", nullable = false)
+    @JoinColumn(name = "owner_id", referencedColumnName = "userId", nullable = false)
     private UserEntity owner;
 
     // Cada sala tem vários jogadores, e um jogador pode estar em uma sala por vez
@@ -44,6 +42,6 @@ public class RoomEntity {
 
     // Cada sala tem um quiz
     @ManyToOne
-    @JoinColumn(name = "quiz_id", nullable = false)
+    @JoinColumn(name = "quiz_id", referencedColumnName = "quizId", nullable = false)
     private QuizEntity quiz;
 }
