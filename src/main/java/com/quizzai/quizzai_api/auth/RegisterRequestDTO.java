@@ -1,4 +1,4 @@
-package com.quizzai.quizzai_api.users;
+package com.quizzai.quizzai_api.auth;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserRegisterDTO {
-    
+public class RegisterRequestDTO {
+
     @NotNull
     private String name;
 

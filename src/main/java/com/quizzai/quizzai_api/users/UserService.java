@@ -2,9 +2,10 @@ package com.quizzai.quizzai_api.users;
 
 import org.springframework.stereotype.Service;
 
+import com.quizzai.quizzai_api.auth.RegisterRequestDTO;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,8 +19,7 @@ public class UserService {
         return userRepository.findByFilter(id, name, email, country, pageable);
     }
 
-
-    public UserEntity createUser(UserRegisterDTO user) {
+    public UserEntity createUser(RegisterRequestDTO user) {
         UserEntity u = UserEntity.builder()
                 .name(user.getName())
                 .email(user.getEmail())
@@ -30,5 +30,9 @@ public class UserService {
                 .rightCount(0L)
                 .build();
         return userRepository.save(u);
+    }
+
+    public UserEntity findByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
     }
 }
