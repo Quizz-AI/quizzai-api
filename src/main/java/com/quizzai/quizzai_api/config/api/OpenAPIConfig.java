@@ -1,4 +1,4 @@
-package com.quizzai.quizzai_api.config;
+package com.quizzai.quizzai_api.config.api;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

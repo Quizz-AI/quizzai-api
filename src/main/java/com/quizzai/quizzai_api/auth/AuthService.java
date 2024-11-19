@@ -3,7 +3,7 @@ package com.quizzai.quizzai_api.auth;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.quizzai.quizzai_api.config.TokenService;
+import com.quizzai.quizzai_api.config.security.TokenService;
 import com.quizzai.quizzai_api.users.UserEntity;
 import com.quizzai.quizzai_api.users.UserService;
 

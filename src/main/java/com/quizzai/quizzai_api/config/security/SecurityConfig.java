@@ -1,4 +1,4 @@
-package com.quizzai.quizzai_api.config;
+package com.quizzai.quizzai_api.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

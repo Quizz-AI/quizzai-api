@@ -1,4 +1,4 @@
-package com.quizzai.quizzai_api.config;
+package com.quizzai.quizzai_api.config.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
