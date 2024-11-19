@@ -2,6 +2,8 @@ package com.quizzai.quizzai_api.users;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.quizzai.quizzai_api.auth.RegisterRequestDTO;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -21,27 +23,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/users")
 @Tag(name = "Users")
 public class UserController {
-    
 
     private final UserService userService;
 
     @GetMapping()
     @Operation(summary = "Get all users")
     public Page<UserEntity> getAllUsers(
-        @RequestParam(required = false) Long id,
-        @RequestParam(required = false) String name,
-        @RequestParam(required = false) String email,
-        @RequestParam(required = false) String country,
-        @PageableDefault(sort="id", direction=Sort.Direction.ASC) Pageable pageable
-    ) {
+            @RequestParam(required = false) Long id,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String country,
+            @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
         return this.userService.findAll(id, name, email, country, pageable);
     }
 
-
     @PostMapping("register")
     @Operation(summary = "Create a new user")
-    public UserEntity createUser(@RequestBody UserRegisterDTO user) {
+    public UserEntity createUser(@RequestBody RegisterRequestDTO user) {
         return this.userService.createUser(user);
     }
-    
+
 }
