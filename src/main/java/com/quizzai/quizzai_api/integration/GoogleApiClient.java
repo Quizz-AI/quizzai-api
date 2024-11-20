@@ -15,20 +15,12 @@ public class GoogleApiClient {
         this.webClient = webClientBuilder
                 .baseUrl("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash")
                 .build();
-
-        // Use a chave de configuração para log ou setup, se necessário
         this.apiKeyConfig = apiKeyConfig;
     }
 
-    public String gerarConteudo() {
-        RequestGoogleDTO request = new RequestGoogleDTO();
+    public String googleApiCall(String text) {
 
-        // Content content = new Content();
-        // Part part = new Part();
-        // part.setText("Escreva uma piada sobre meu amigo Gabriel");
-
-        // content.setParts(List.of(part));
-        // request.setContents(List.of(content));
+        String body = apiCallBodyFormatter(text);
 
         return webClient.post()
                 .uri(uriBuilder -> uriBuilder
@@ -36,9 +28,25 @@ public class GoogleApiClient {
                         .queryParam("key", apiKeyConfig.getApiKey()) // Adiciona a chave na requisição
                         .build())
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(request)
+                .bodyValue(body)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
+    }
+
+    private String apiCallBodyFormatter(String text) {
+        return """
+                {
+                  "contents": [
+                    {
+                      "parts": [
+                        {
+                          "text": "%s"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                """.formatted(text);
     }
 }
