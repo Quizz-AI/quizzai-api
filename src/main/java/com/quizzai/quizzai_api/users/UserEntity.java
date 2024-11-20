@@ -30,7 +30,7 @@ public class UserEntity {
 
     @NonNull
     @Email(message = "Email should be valid")
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @NonNull
@@ -54,10 +54,10 @@ public class UserEntity {
     private String country;
 
     // Um usuário pode ser o dono de várias salas
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RoomEntity> ownedRooms;
 
     // Um usuário pode ter vários quizzes
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<QuizEntity> quizzes;
 }

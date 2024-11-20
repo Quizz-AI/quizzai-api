@@ -28,6 +28,6 @@ public class QuizEntity {
     private UserEntity owner;
 
     // Um quiz pode estar em várias salas
-    @OneToMany(mappedBy = "quiz")
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RoomEntity> rooms;
 }

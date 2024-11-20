@@ -23,7 +23,7 @@ public class RoomEntity {
     private Long roomId;
 
     @NonNull
-    @Column(name = "joinCode")
+    @Column(name = "joinCode", unique = true)
     private String joinCode;
 
     // Cada sala tem um dono
@@ -33,11 +33,7 @@ public class RoomEntity {
 
     // Cada sala tem vários jogadores, e um jogador pode estar em uma sala por vez
     @ManyToMany
-    @JoinTable(
-        name = "room_players",
-        joinColumns = @JoinColumn(name = "room_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    @JoinTable(name = "room_players", joinColumns = @JoinColumn(name = "room_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<UserEntity> players;
 
     // Cada sala tem um quiz
