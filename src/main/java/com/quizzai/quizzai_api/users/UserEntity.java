@@ -1,5 +1,6 @@
 package com.quizzai.quizzai_api.users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.quizzai.quizzai_api.quizes.QuizEntity;
 import com.quizzai.quizzai_api.rooms.RoomEntity;
 import jakarta.persistence.*;
@@ -59,5 +60,6 @@ public class UserEntity {
 
     // Um usuário pode ter vários quizzes
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<QuizEntity> quizzes;
 }

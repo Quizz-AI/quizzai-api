@@ -1,5 +1,6 @@
 package com.quizzai.quizzai_api.questions;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.quizzai.quizzai_api.quizes.QuizEntity;
 
 import jakarta.persistence.*;
@@ -25,5 +26,6 @@ public class QuestionEntity {
 
     @ManyToOne
     @JoinColumn(name = "quiz_id", referencedColumnName = "quizId", nullable = false)
+    @JsonIgnore
     private QuizEntity quiz;
 }
